@@ -1,1 +1,116 @@
-An Android client library for the Android platform.
+Fluidroid
+=========
+
+A Fluidinfo client library for the Android platform.
+
+Contents
+========
+
+* fluidinfo - the mobile client library
+* fluidinfoTest - the test suite for the above
+
+Setup
+=====
+
+You should follow the instructions for downloading and installing Eclipse and
+the Android development environment here:
+
+http://developer.android.com/index.html
+
+Import the fluidinfo project
+============================
+
+* In Eclipse select: File -> New -> Android Project
+* In the resulting dialog make sure "Create from existing source" is selected
+in the "Contents" section. Make sure you browse to the "fluidinfo" directory.
+* Click finish and the project should appear in Eclipse's Package Explorer
+* Right click on the project and select "Refactor -> Rename" and make the new
+name "fluidinfo" (this is so the test suite can find its references).
+
+Configure an Android Virtual Device (AVD)
+=========================================
+
+An AVD is simply a VM for Android in which you run/test your application. You
+need to make sure that you have one set up for the version of Android we're
+targeting (Version 2.2 and above).
+
+* Click Window -> Android SDK and AVD Manager
+* Make sure "Virtual Devices" is selected on the left hand side
+* There might be devices already configured. If so, look down the "platform"
+column and if you see 2.2 then stop since this requirement is met.
+* Click "New" and give the device a name, make sure the "Target" is "Android
+2.2 - API Level 8" and that the SD Card is 16 MiB. Keep all the other settings
+the same.
+* Click the "Create AVD" button.
+
+It'll now appear in the list of AVD devices available to you and will be used,
+as required when running/testing Fluidroid.
+
+If you just want to run the unit tests and work in an editor other than
+Eclipse you can skip most of the rest of this an head straight to the bottom
+for instructions on how to run the test-suite.
+
+Import the Test Suite
+=====================
+
+* In Eclipse select: File -> New -> Java Project
+* In the resulting dialog fill in the name as "fluidinfoTest" and  make sure 
+"Create project from existing source" is selected in the "Contents" section
+and ensure you browse to the "fluidinfoTest" directory.
+* Click finish.
+
+Running the Test Suite
+======================
+
+Most of the following information is extracted from here:
+
+http://developer.android.com/guide/topics/testing/testing_android.html
+
+Using ANT is probably the quickest option.
+
+From Within Eclipse
+===================
+
+Assuming you have both projects in your Package Explorer *without* any
+warnings then you should be able to:
+
+* Right-click on the test suite, select Run As -> Android JUnit Test
+* You might have to wait a while as your AVD for Android 2.2 boots up - all
+the unit tests are run within this device.
+* Smile as the tests all pass and the Eclipse JUnit plugin shows green.
+
+From the Commandline Using ANT
+==============================
+
+This is probably the easiest option to get the test suite running ASAP.
+
+* From the root of the branch type::
+
+    android update project --target 8 --path fluidinfo 
+    android create test-project -m /absolute/path/to/fluidinfo -p /absolute/path/to/fluidinfoTest
+
+I'm not sure why you need to use the absolute paths for the create
+test-project command but relative paths don't work for me. Also, you can
+safely ignore the "Please consider using 'android update' instead." error.
+
+* cd into the fluidinfoTest directory and type::
+
+    ant run-tests
+
+You should see a bunch of compilation messages and might have to wait a while
+as the Android VM boots up. But at the end you should see something like
+this::
+
+    run-tests:
+    124 
+    [echo] Running tests ...
+    [exec] 
+    [exec] com.fluidinfo.fluidinfo.test.FluidinfoProviderTest:...
+    [exec] Time: 0.086
+    [exec] 
+    [exec] OK (3 tests)
+    [exec] 
+    [exec] 
+
+    BUILD SUCCESSFUL
+    Total time: 14 seconds
