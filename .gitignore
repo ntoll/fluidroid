@@ -5,4 +5,5 @@
 *.dex
 *.class
 fluidinfo/bin/*
+fluidinfo/gen/*
 local.properties
