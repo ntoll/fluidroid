@@ -4,6 +4,6 @@
 *.ap_
 *.dex
 *.class
-fluidinfo/bin/*
-fluidinfo/gen/*
+*/bin/*
+*/gen/*
 local.properties
