@@ -1,0 +1,8 @@
+.classpath
+.project
+*.apk
+*.ap_
+*.dex
+*.class
+fluidinfo/bin/*
+local.properties
